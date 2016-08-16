@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SwiftWadReader/WadReader.swift"
-            timestampString = "492947991.654194"
+            timestampString = "492963046.022007"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "97"
-            endingLineNumber = "97"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
             landmarkName = "parseWadFile()"
             landmarkType = "7">
          </BreakpointContent>

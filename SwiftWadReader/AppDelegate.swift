@@ -47,7 +47,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return state == .loaded
     }
     
-    private var state: UIState = .unloaded {
+    fileprivate var state: UIState = .unloaded {
         // We could also define KVO dependencies, but then using enums would be a bit more difficult
         willSet {
             willChangeValue(forKey: Keys.AppDelegateLockedUI)
@@ -59,7 +59,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
     
-    private var lumps: [Lump] = []
+    fileprivate var lumps: [Lump] = []
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         progress.kind = ProgressKind.file
@@ -69,8 +69,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             handleWADFile(url: wadURL)
         }
     }
-
-    override func observeValue(forKeyPath keyPath: String?, of object: AnyObject?, change: [NSKeyValueChangeKey : AnyObject]?, context: UnsafeMutablePointer<Void>?) {
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         switch context {
         case (&Keys.ProgressFractionCompleted)?:
             progressBar.doubleValue = progress.fractionCompleted
@@ -104,12 +104,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
-    private func handleProgressEvent(object: AnyObject?, keyPath: String?, change: [NSKeyValueChangeKey : AnyObject]?) -> () {
+    fileprivate func handleProgressEvent(object: AnyObject?, keyPath: String?, change: [NSKeyValueChangeKey : AnyObject]?) -> () {
         progressBar.doubleValue = progress.fractionCompleted
         progressLabel.stringValue = progress.localizedDescription
     }
     
-    private func userError(withMessage message: String) {
+    fileprivate func userError(withMessage message: String) {
         let alert = NSAlert()
         alert.messageText = message
         alert.informativeText = "There was an error"
@@ -156,11 +156,11 @@ extension AppDelegate {
 // MARK: TableView
 
 extension AppDelegate: NSTableViewDataSource {
-    func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> AnyObject? {
-        return lumps[row].name
+    public func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
+        return lumps[row].name as NSString
     }
-    
-    func numberOfRows(in tableView: NSTableView) -> Int {
+
+    public func numberOfRows(in tableView: NSTableView) -> Int {
         return lumps.count
     }
 }
